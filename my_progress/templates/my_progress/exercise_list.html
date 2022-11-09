@@ -1,0 +1,64 @@
+{% extends "main_page/navbar.html" %}
+
+{% block body_block %}
+
+<div class="mt-5 me-5 ms-5 p-5 bg-dark text-white rounded">
+   
+    <div style="text-align:center;width: 100%;">
+            <h3>MY EXERCISES</h3>
+            <div style="padding-left:95%;height:10px;width: 10px;">
+                <a href="{% url 'my_progress:Add'  %}" class="btn btn-success" ><i class="fa-solid fa-circle-plus"></i></a>
+            </div>
+    </div>  
+    
+    
+    <br><br>
+    <div class="accordion">
+        <!-- <h1>{{exercises.username}}</h1> -->
+        {% for exercise in exercises %}
+        
+        {{exercise.user}}
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="heading{{forloop.counter}}">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{forloop.counter}}" aria-expanded="true" aria-controls="collapse{{forloop.counter}}">
+                Exercise: {{exercise.exercise_name}}
+              </button>
+            </h2>
+
+            <div id="collapse{{forloop.counter}}" class="accordion-collapse collapse show" aria-labelledby="heading{{forloop.counter}}" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                    <ul class="form">
+                        <li>
+                            Current Reps: {{ exercise.rep_count}}
+                        </li>
+                        <li>
+                            Current Weight: {{ exercise.current_weight}} kg
+                        </li>
+                        <li>
+                            Goal Weight: {{ exercise.goal_weight }} kg
+                        </li>
+                    </ul>
+                    <a class=" ml-5 btn btn-success" href="{% url 'my_progress:Update' exercise.id %}"> <i class="fas fa-edit pl-3"></i> </a>
+                    <a class="btn btn-danger ml-5" href="delete/{{exercise.id}}"> <i class="fa-solid fa-trash-can pl-3"></i> </a>
+              </div>
+
+              
+              
+             
+            </div>
+        </div>
+
+            
+
+        {% endfor %}
+    </div>
+    
+    
+</div>
+
+
+{% endblock %}
+
+
+    
+

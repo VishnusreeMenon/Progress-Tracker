@@ -1,0 +1,20 @@
+{% extends "main_page/navbar.html" %}
+
+{% block body_block %}
+<br>
+<br>
+    <p>FILTER BY</p>
+
+    <form action="" method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <input type="submit" value="Submit">
+    </form>
+
+    <div>
+
+        {% block filter_block %}    
+        {% endblock %}
+    </div>
+    
+{% endblock %}

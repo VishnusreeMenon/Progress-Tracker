@@ -1,0 +1,14 @@
+<label class="form-label" for="Email">Email</label>
+                    <input  type="email" id="Email" placeholder="name@example.com" required class="form-control">
+                    
+                    <label class="form-label" for="username">Username</label>
+                    <input  type="text" id="username" placeholder="CBum" required class="form-control">
+
+                    <label class="form-label" style="text-align:left"  for="Password">Password</label>
+                    <input placeholder="***************"  type="password" id="Password" required class="form-control form-control">
+                    <br>
+                    <div  style="text-align:center">
+                        <input class="btn btn-success " style="margin:auto" type="submit" value="Login">
+                        <br><br>
+                        <a style="text-align:center" href="{% url 'login_signup:Login'%}">Already Registered?</a>
+                    </div> 

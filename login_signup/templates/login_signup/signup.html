@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProTrack</title>
+    <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/763/763812.png">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body >
+    <div style="margin:auto;margin-top:100px; width:30%; height:60%">
+
+        <div class="card text-white" style="background-color:#073B4C">
+            <br>
+            <h4 style="margin-left:20px" class="card-title">
+                SIGNUP
+            </h4>
+            
+
+            <div class="card-body">
+                <form method="POST" action="{% url 'login_signup:Signup' %}" class="form">
+                    {% csrf_token %}
+                    {% if failed %}
+                        <p style="color:red">Username already exists</p>
+                    {% endif %}
+                    <div class="form-group">
+
+                        <label class="form-label" for="Email">Email</label>
+                        <div id="Email" class="form">{{ userInfo.email }}</div>
+                    </div>
+
+                    <div class="form-group">
+
+                        <label class="form-label" for="username">Username</label>
+                        <div id="username" class="form">{{ userInfo.username }}</div>
+                    </div>
+
+                    <div class="form-group">
+
+                        <label class="form-label" for="password">Passwords</label>
+                        <div id="password" class="form">{{ userInfo.password }}</div>
+                    </div>
+                    
+                    <!-- <label class="form-label" for="username">Username</label>
+                    <input  type="text" id="username" placeholder="CBum" required class="form-control" value = {{userInfo.Username}}>
+                    {{userInfo.password}}
+                    <label class="form-label" style="text-align:left"  for="Password">Password</label>
+                    <input placeholder="***************"  type="password" id="Password" required class="form-control form-control"> -->
+                    <br>
+                    <div  style="text-align:center">
+                        <input class="btn btn-success " style="margin:auto" type="submit" value="Login">
+                        <br><br>
+                        <a style="text-align:center" href="{% url 'login_signup:Login'%}">Already Registered?</a>
+                    </div> 
+                </form>
+    
+                
+            </div>
+    
+        </div>
+    </div>
+
+</body>
+</html>
