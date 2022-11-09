@@ -4,6 +4,10 @@ from my_progress.models import Exercise
 from django.http import HttpResponse,HttpResponseRedirect
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .serializers import ExerciseSerializer
+# import json
 
 from my_progress.forms import AddExerciseForm
 # Create your views here.
@@ -42,12 +46,14 @@ def exercise_page(request):
         if request.user:
             print(request.user)
             # request.object.user = request.user
-        
+
             exercise.user = request.user
+            # return Response(ExerciseSerializer(form_info).data)
         exercise.save()
         
     else:
         form_info = AddExerciseForm()
+    
     return render(request,'my_progress/add_exercise.html',{'form':form_info})
     
     
@@ -66,3 +72,30 @@ class UpdateExercise(UpdateView):
     
         
     
+    
+@api_view(['GET'])
+def exercise_list(request):
+    
+    exercises = Exercise.objects.all()
+    serializer = ExerciseSerializer(exercises,many=True)
+    return Response(serializer.data)    
+    
+    
+    
+@api_view(['POST'])
+def add_exercise(request):
+    
+    new_exercise = ExerciseSerializer(data = request.data)
+    # print(new_exercise)
+    if new_exercise.is_valid():
+        new_exercise.save()
+    return Response(new_exercise.data)
+
+@api_view(['POST'])
+def update_exercise(request,pk):
+    exercise = Exercise.objects.get(id = pk)
+    new_exercise = ExerciseSerializer(instance = exercise,data = request.data)
+    # print(new_exercise)
+    if new_exercise.is_valid():
+        new_exercise.save()
+    return Response(new_exercise.data)
